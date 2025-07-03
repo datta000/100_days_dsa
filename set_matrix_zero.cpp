@@ -31,4 +31,4 @@ class Solution {
                 for(int i=0;i<n;++i) matrix[0][i]=0;
             }
         }
-    };
+    }
