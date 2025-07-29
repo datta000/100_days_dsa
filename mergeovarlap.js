@@ -1,15 +1,17 @@
 /**
- * @param {number[][]} matrix
- * @return {void} Do not return anything, modify matrix in-place instead.
+ * @param {number[][]} intervals
+ * @return {number[][]}
  */
-var rotate = function (matrix) {
-
-    for (let i = 0; i < matrix.length; i++) {
-        for (let j = i + 1; j < matrix[i].length; j++) {
-            [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]]
+var merge = function (intervals) {
+    let n = intervals.length;
+    intervals.sort((a, b) => a[0] - b[0]);
+    for (let i = 0; i < n - 1; i++) {
+        if (intervals[i][1] >= intervals[i + 1][0]) {
+            intervals[i][1] = Math.max(intervals[i + 1][1], intervals[i][1])
+            intervals.splice(i + 1, 1)
+            n = intervals.length
+            i--;
         }
     }
-    for (let i = 0; i < matrix.length; i++) {
-        matrix[i].reverse();
-    }
+    return intervals;
 };
