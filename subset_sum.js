@@ -12,7 +12,7 @@ var subsetsWithDup = function (nums) {
             if (i > start && nums[i] === nums[i - 1]) continue;
             subarr.push(nums[i]);
             subset(i + 1, subarr);
-            subarr.pop();
+            subarr.pop()
         }
     }
     subset(0, [])
