@@ -4,25 +4,18 @@
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-    const result = [];
-
-    function backtrack(start, path, total) {
-        if (total === target) {
-            result.push([...path]); // found valid combination
-            return;
+    const result = []
+    const backtrack = (index, combi, sum) => {
+        if (sum === target) {
+            result.push([...combi])
+            return
         }
-
-        if (total > target) {
-            return; // exceeded target, backtrack
-        }
-
-        for (let i = start; i < candidates.length; i++) {
-            path.push(candidates[i]);                // choose
-            backtrack(i, path, total + candidates[i]); // explore (not i+1, because reuse is allowed)
-            path.pop();                              // un-choose (backtrack)
-        }
+        if (sum > target || index >= candidates.length) return
+        combi.push(candidates[index])
+        backtrack(index, combi, sum + candidates[index])
+        combi.pop()
+        backtrack(index + 1, combi, sum)
     }
-
-    backtrack(0, [], 0);
-    return result;
+    backtrack(0, [], 0)
+    return result
 };

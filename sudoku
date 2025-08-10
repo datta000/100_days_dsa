@@ -5,11 +5,9 @@
 var solveSudoku = function(board) {
     function isValid(row, col, char) {
         for (let i = 0; i < 9; i++) {
-            // Check row
+            
             if (board[row][i] === char) return false;
-            // Check col
             if (board[i][col] === char) return false;
-            // Check 3x3 box
             let boxRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
             let boxCol = 3 * Math.floor(col / 3) + (i % 3);
             if (board[boxRow][boxCol] === char) return false;
@@ -25,15 +23,15 @@ var solveSudoku = function(board) {
                         let char = String(num);
                         if (isValid(row, col, char)) {
                             board[row][col] = char;
-                            if (backtrack()) return true; // solved
-                            board[row][col] = "."; // backtrack
+                            if (backtrack()) return true;
+                            board[row][col] = "."; 
                         }
                     }
-                    return false; // no valid number found
+                    return false; 
                 }
             }
         }
-        return true; // board filled successfully
+        return true;
     }
 
     backtrack();
