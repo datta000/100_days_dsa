@@ -4,28 +4,21 @@
  * @return {number[][]}
  */
 var combinationSum2 = function (candidates, target) {
-    const result = [];
-    candidates.sort((a, b) => a - b); // Sorting helps us skip duplicates
-
-    function backtrack(start, path, total) {
-        if (total === target) {
-            result.push([...path]); // Found valid combination
-            return;
+    candidates.sort((a, b) => a - b)
+    const result = []
+    const backtrack = (index, combi, sum) => {
+        if (sum === target) {
+            result.push([...combi])
+            return
         }
-
-        for (let i = start; i < candidates.length; i++) {
-            // Skip duplicates at the same level
-            if (i > start && candidates[i] === candidates[i - 1]) continue;
-
-            // If total exceeds target, no need to continue
-            if (total + candidates[i] > target) break;
-
-            path.push(candidates[i]); // Choose
-            backtrack(i + 1, path, total + candidates[i]); // i+1 because each number only once
-            path.pop(); // Backtrack
+        if (sum > target || index >= candidates.length) return
+        for (let i = index; i < candidates.length; i++) {
+            if (i > index && candidates[i] === candidates[i - 1]) continue;
+            combi.push(candidates[i])
+            backtrack(i + 1, combi, sum + candidates[i])
+            combi.pop()
         }
     }
-
-    backtrack(0, [], 0);
-    return result;
+    backtrack(0, [], 0)
+    return result
 };
