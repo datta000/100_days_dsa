@@ -5,33 +5,32 @@
 var partition = function (s) {
     const result = [];
 
-    // Helper to check if a string is a palindrome between indices left and right
-    function isPalindrome(str, left, right) {
+    const isPalindrome = (str) => {
+        let left = 0, right = str.length - 1;
         while (left < right) {
             if (str[left] !== str[right]) return false;
             left++;
             right--;
         }
         return true;
-    }
+    };
 
-    // Backtracking function
-    function backtrack(start, path) {
-        // If we reach the end of the string, we add the current path to result
+    const backtrack = (start, path) => {
         if (start === s.length) {
             result.push([...path]);
             return;
         }
 
-        // Try all possible partitions starting from index `start`
         for (let end = start; end < s.length; end++) {
-            if (isPalindrome(s, start, end)) {
-                path.push(s.slice(start, end + 1)); // Choose
-                backtrack(end + 1, path);           // Explore
-                path.pop();                         // Backtrack
+            let substring = s.slice(start, end + 1);
+
+            if (isPalindrome(substring)) {
+                path.push(substring);
+                backtrack(end + 1, path);
+                path.pop();
             }
         }
-    }
+    };
 
     backtrack(0, []);
     return result;
