@@ -5,9 +5,9 @@
 var solveSudoku = function(board) {
     function isValid(row, col, char) {
         for (let i = 0; i < 9; i++) {
-            
             if (board[row][i] === char) return false;
             if (board[i][col] === char) return false;
+     
             let boxRow = 3 * Math.floor(row / 3) + Math.floor(i / 3);
             let boxCol = 3 * Math.floor(col / 3) + (i % 3);
             if (board[boxRow][boxCol] === char) return false;
@@ -31,7 +31,7 @@ var solveSudoku = function(board) {
                 }
             }
         }
-        return true;
+        return true; 
     }
 
     backtrack();
