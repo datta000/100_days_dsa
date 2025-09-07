@@ -24,7 +24,5 @@ var removeNthFromEnd = function (head, n) {
         second = second.next;
     }
 
-    second.next = second.next.next;
-
     return dummy.next;
 };
