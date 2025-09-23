@@ -1,25 +1,20 @@
 /**
  * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
  */
-
-class Solution {
-    public:
-        ListNode* middleNode(ListNode* head) {
-            ListNode * slow = head;
-            ListNode * fast = head;
-
-            while (fast != nullptr && fast -> next != nullptr) {
-                slow = slow -> next;
-                fast = fast -> next -> next;
-            }
-
-            return slow; // middle node
-        }
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var middleNode = function (head) {
+    let slow = head;
+    let fast = head;
+    while (fast != null && fast.next != null) {
+        slow = slow.next
+        fast = fast.next.next
+    }
+    return slow
 };
