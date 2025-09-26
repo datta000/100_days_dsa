@@ -1,37 +1,33 @@
 /**
  * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
  */
-class Solution {
-    public:
-        ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        ListNode dummy;  // Dummy node to simplify edge cases
-            ListNode * current = & dummy; // Pointer to build the result list
-        int carry = 0;
 
-            while (l1 || l2 || carry) {
-            int sum = carry;
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+var addTwoNumbers = function (l1, l2) {
+    let dummy = new ListNode(0);
+    let current = dummy;
+    let carry = 0;
 
-                if (l1) {
-                    sum += l1 -> val;
-                    l1 = l1 -> next;
-                }
-                if (l2) {
-                    sum += l2 -> val;
-                    l2 = l2 -> next;
-                }
+    while (l1 !== null || l2 !== null || carry !== 0) {
+        let val1 = (l1 !== null) ? l1.val : 0;
+        let val2 = (l2 !== null) ? l2.val : 0;
 
-                carry = sum / 10;
-                current -> next = new ListNode(sum % 10);
-                current = current -> next;
-            }
+        let sum = val1 + val2 + carry;
+        carry = Math.floor(sum / 10);
+        current.next = new ListNode(sum % 10);
+        current = current.next;
 
-            return dummy.next;
-        }
+        if (l1 !== null) l1 = l1.next;
+        if (l2 !== null) l2 = l2.next;
+    }
+
+    return dummy.next;
 };
